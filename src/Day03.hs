@@ -1,5 +1,5 @@
 import qualified Data.Set as S
-
+import Data.List (find)
 import Util
 
 type PSet = S.Set (Int, Int)
@@ -14,12 +14,10 @@ main = do
   print $ lonely pss cp
 
 commonPoints :: [PSet] -> PSet
-commonPoints = go (S.empty, S.empty) where
-  go (once, twice) pss = 
-    case pss of
-      [] -> twice
-      (ps:pss) -> let s = S.intersection ps once
-                  in go (S.union ps once, S.union s twice) pss
+commonPoints = snd . foldr step (S.empty, S.empty) where
+  step ps (once, twice) =
+    let s = S.intersection ps once
+    in (S.union ps once, S.union s twice)
 
 lonely :: [PSet] -> PSet -> Int
 lonely = go 1 where
