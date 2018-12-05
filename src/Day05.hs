@@ -12,8 +12,8 @@ reduceWith p = foldr step []
     step x stack
       | p x = stack
       | otherwise = case stack of
-        (y:ys) | x `match` y -> ys
-        ys  -> x:ys
+          (y:ys) | x `match` y -> ys
+          ys  -> x:ys
 
 main :: IO ()
 main = do
