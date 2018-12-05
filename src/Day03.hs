@@ -1,5 +1,4 @@
 import qualified Data.Set as S
-import Data.List (find)
 import Util
 
 type PSet = S.Set (Int, Int)
